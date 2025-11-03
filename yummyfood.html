@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yummy Food</title>
+<style>
+/* Reset */
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; scroll-behavior: smooth;}
+
+/* Navbar */
+nav {
+  background: rgba(0,0,0,0.85);       
+  position: fixed; top: 0; width: 100%; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  flex-wrap: wrap;
+}
+.logo img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+}
+
+
+/* Nav links */
+.nav-links {
+  display: flex; gap: 25px;
+}
+nav a {color: white; text-decoration: none; font-weight: 500; transition:0.3s; font-size: 1.05em;}
+nav a:hover {color: #f4d03f;}
+
+/* Hero */
+.hero {
+  background: url('81f3ff974d82520780078ba1cfbd453a1583259680.avif') center/cover no-repeat;
+  height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; color: white;
+  position: relative; padding-top: 80px;
+}
+.hero::before {
+  content:"";
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.55);
+  z-index:0;
+}
+.hero-content {
+  position: relative; z-index:1;
+}
+.hero h1 {font-size: 4em; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.7);}
+.hero p {font-size: 1.5em; margin-bottom: 30px; text-shadow: 1px 1px 5px rgba(0,0,0,0.7);}
+.hero button {
+  background: #f4d03f; color: #333; border: none; padding: 15px 40px; font-size: 1.2em;
+  border-radius: 30px; cursor: pointer; transition: 0.3s;
+}
+.hero button:hover {background: #333; color: #f4d03f; transform: scale(1.05);}
+
+/* Sections */
+section {padding: 80px 20px; text-align: center;}
+section h2 {font-size: 2.5em; margin-bottom: 40px; color: #444;}
+
+/* About */
+.about {
+  background: linear-gradient(135deg, #f6d365, #fda085); 
+  color: #fff;
+  padding: 120px 20px;
+  min-height: 100vh;
+}
+.about-content {max-width: 1000px; margin: auto;}
+.about p {margin-bottom: 20px; font-size: 1.2em; line-height:1.8;}
+.about-features {display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-top:40px;}
+.feature-box {background: rgba(255,255,255,0.2); padding:25px; border-radius:20px; width:250px; box-shadow:0 8px 25px rgba(0,0,0,0.15); color:#fff; transition:0.3s;}
+.feature-box h4 {margin-bottom:10px; color:#fff;}
+.feature-box:hover {background: rgba(255,255,255,0.35); transform: translateY(-10px);}
+
+/* Menu */
+.menu-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;}
+.menu-item {background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s;}
+.menu-item:hover {transform: translateY(-8px);}
+.menu-item img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+.menu-item h5 {font-size: 1.3em; margin: 10px 0; color: #444;}
+.price {color: #f4d03f; font-weight: bold; font-size: 1.2em;}
+
+/* Gallery */
+.gallery-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;}
+.gallery-grid img {width: 100%; height: 100%; object-fit: cover; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition:0.3s;}
+.gallery-grid img:hover {transform: scale(1.05);}
+
+/* Reservation */
+.reservation {
+  background: url('https://images.unsplash.com/photo-1598511721852-3b36f747c0e1') center/cover no-repeat;
+  color: white; padding: 120px 20px; position: relative;
+}
+.reservation::before {
+  content:"";
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.55);
+  z-index:0;
+}
+form {max-width: 600px; margin: auto; display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.65); padding:25px; border-radius:20px; position: relative; z-index:1;}
+input, textarea {padding: 12px; border: none; border-radius: 8px; font-size: 1em;}
+form button {padding: 12px; background: #f4d03f; border: none; border-radius: 30px; font-size: 1.1em; cursor: pointer;}
+form button:hover {background: #333; color: #f4d03f;}
+
+/* Contact */
+.contact {background: #f8f1e4; padding: 80px 20px;}
+.contact-info {display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-bottom: 30px; text-align:left;}
+.contact-info div {min-width:200px;}
+.contact-info a {color:#e74c3c; text-decoration:none; font-weight:bold;}
+.contact-info a:hover {text-decoration:underline;}
+.map iframe {border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
+
+/* Footer */
+footer {background: #333; color: #fff; padding: 30px; text-align: center;}
+footer p {margin: 5px 0; font-size: 0.95em;}
+
+@media (max-width:600px){
+  .menu-item img{height:180px;}
+  .hero h1{font-size:2.5em;}
+  .hero p{font-size:1.1em;}
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="logo">
+    <a href="#home"><img src="download.png" alt="Yummy Food "></a>
+  </div>
+
+
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reservation">Book</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Welcome to Yummy Food</h1>
+    <p>Delicious meals, made with love</p>
+    <button onclick="location.href='#reservation'">Book a Table</button>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-content">
+    <h2>About Us</h2>
+    <p><b>Yummy Food</b> started with a simple idea — to bring people together through the love of food. From a small kitchen in Mangalore to a popular spot in the city, we aim to serve happiness on every plate.</p>
+    <p>Our chefs craft each dish with fresh ingredients, authentic flavors, and care, ensuring every bite is memorable.</p>
+
+    <div class="about-features">
+      <div class="feature-box">
+        <h4>🍔 Freshly Made</h4>
+        <p>From momos to shakes, our food is always prepared fresh for you.</p>
+      </div>
+      <div class="feature-box">
+        <h4>⚡ Quick Service</h4>
+        <p>Perfect for busy schedules — your food reaches you without delay.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🍹 Cozy Vibes</h4>
+        <p>A vibrant space to hang out, relax, and enjoy great food.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu -->
+<section class="menu" id="menu">
+  <h2>Our Menu</h2>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <img src="OIP (6).jpeg" alt="Veg Momos">
+      <h5>Veg Momos</h5>
+      <p>Steamed dumplings served with spicy chutney.</p>
+      <span class="price">₹120</span>
+    </div>
+    <div class="menu-item">
+      <img src="OIP (5).jpeg" alt="Paneer Tikka">
+      <h5>Paneer Tikka</h5>
+      <p>Grilled paneer cubes marinated with spices.</p>
+      <span class="price">₹220</span>
+    </div>
+    <div class="menu-item">
+      <img src="aaa92a3c0a605671a2e1b20871913c34.jpg" alt="Biryani">
+      <h5>Biryani</h5>
+      <p>Aromatic rice cooked with flavorful spices.</p>
+      <span class="price">₹150</span>
+    </div>
+    <div class="menu-item">
+      <img src="OIP (7).jpeg" alt="Peri Peri Momos">
+      <h5>Peri Peri Momos</h5>
+      <p>Spicy fried chicken peri peri momos.</p>
+      <span class="price">₹100</span>
+    </div>
+    <div class="menu-item">
+      <img src="OIP (8).jpeg" alt="Pizza">
+      <h5>Pizza</h5>
+      <p>Delicious flavoured pizza.</p>
+      <span class="price">₹200</span>
+    </div>
+    <div class="menu-item">
+      <img src="OIP (9).jpeg" alt="Burger">
+      <h5>Burger</h5>
+      <p>Stuffed with juicy chicken patty.</p>
+      <span class="price">₹220</span>
+    </div>
+    <div class="menu-item">
+      <img src="OIP (10).jpeg" alt="Shawarma">
+      <h5>Shawarma</h5>
+      <p>Authentic Middle Eastern wrap.</p>
+      <span class="price">₹180</span>
+    </div>
+    <div class="menu-item">
+      <img src="restaurant-vertical-color-cocktail-menu-vector-9946814.jpg" alt="Cold Drinks">
+      <h5>Cold Drinks</h5>
+      <p>Refreshing beverages to quench your thirst.</p>
+      <span class="price">₹50-₹150</span>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery" id="gallery">
+  <h2>Food Gallery</h2>
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Dish 1">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="Dish 2">
+    <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088" alt="Dish 3">
+    <img src="OIP (5).jpeg" alt="Dish 4">
+    <img src="OIP (6).jpeg" alt="Dish 5">
+    <img src="OIP (7).jpeg" alt="Dish 6">
+    <img src="OIP (8).jpeg" alt="Dish 7">
+    <img src="OIP (9).jpeg" alt="Dish 8">
+    <img src="OIP (10).jpeg" alt="Dish 9">
+  </div>
+</section>
+
+<!-- Reservation -->
+<section class="reservation" id="reservation">
+  <h2>Book a Table</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <input type="date" required>
+    <input type="time" required>
+    <textarea rows="4" placeholder="Special Requests"></textarea>
+    <button type="submit">Reserve Now</button>
+  </form>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <div class="contact-info">
+    <div>
+      <h4>📍 Address</h4>
+      <p>Balmatta, opposite Juice Junction, Mangalore, Karnataka</p>
+    </div>
+    <div>
+      <h4>📞 Phone</h4>
+      <p>+91 78XX XX66 62</p>
+    </div>
+    <div>
+      <h4>✉️ Email</h4>
+      <p><a href="https://info@yummyfood.com" target="_blank">info@yummyfood.com</a></p>
+    </div>
+    <div>
+      <h4> Instagram</h4>
+      <p><a href="https://instagram.com/fxthimx47" target="_blank">@fxthimx47</a></p>
+      
+    </div>
+  </div>
+  <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.430233842774!2d74.84213481509169!3d12.914142491283385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba35f0f2c9f1f7b%3A0xa45d8ab0e9c3d1b1!2sJuice%20Junction!5e0!3m2!1sen!2sin!4v1695036000000!5m2!1sen!2sin" 
+    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Yummy Food. All Rights Reserved.</p>
+  <p>Follow us on Instagram & Facebook</p>
+</footer>
+
+</body>
+</html>
